@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block content %}
+<form method="post">
+  <input name="name" placeholder="Name" required>
+  <input name="email" type="email" placeholder="Email" required>
+  <textarea name="message" placeholder="Message" required></textarea>
+  <button type="submit">Send</button>
+</form>
+{% endblock %}

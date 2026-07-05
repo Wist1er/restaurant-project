@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block content %}
+<form method="post">
+  <input name="name" placeholder="Name" required>
+  <input name="email" type="email" placeholder="Email" required>
+  <input name="phone" placeholder="Phone">
+  <input name="guests" type="number" value="1">
+  <input name="reserve_date" type="date" required>
+  <input name="reserve_time" type="time" required>
+  <button type="submit">Book table</button>
+</form>
+{% endblock %}

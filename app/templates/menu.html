@@ -1,0 +1,6 @@
+{% extends 'layout.html' %}
+{% block content %}
+<ul>
+  {% for m in items %}<li>{{ m.title }} ({{ m.category }}) — {{ m.price }}</li>{% endfor %}
+</ul>
+{% endblock %}
