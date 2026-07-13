@@ -1,6 +1,28 @@
 {% extends 'layout.html' %}
 {% block content %}
-<ul>
-  {% for m in items %}<li>{{ m.title }} ({{ m.category }}) — {{ m.price }}</li>{% endfor %}
-</ul>
+<section class="menu" style="padding-top:160px">
+  <div class="container">
+    <h2 class="section-title section-title--center">Full Menu</h2>
+    <div class="section-underline section-underline--center"></div>
+
+    <div class="menu__filters">
+      <button class="menu__filter menu__filter--active" data-category="all">All</button>
+      {% for category in items|map(attribute='category')|unique %}
+        <button class="menu__filter" data-category="{{ category }}">{{ category }}</button>
+      {% endfor %}
+    </div>
+
+    <div class="menu__grid">
+      {% for item in items %}
+        <div class="menu__item" data-category="{{ item.category }}">
+          <div>
+            <div class="menu__item-title">{{ item.title }}</div>
+            <div class="menu__item-subtitle">{{ item.category }}</div>
+          </div>
+          <div class="menu__item-price">${{ item.price }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 {% endblock %}

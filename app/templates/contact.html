@@ -1,9 +1,17 @@
 {% extends 'layout.html' %}
 {% block content %}
-<form method="post">
-  <input name="name" placeholder="Name" required>
-  <input name="email" type="email" placeholder="Email" required>
-  <textarea name="message" placeholder="Message" required></textarea>
-  <button type="submit">Send</button>
-</form>
+<section class="form-page">
+  <div class="container">
+    <div class="form-card">
+      <h2 class="section-title section-title--center">Contact Us</h2>
+      <div class="section-underline section-underline--center"></div>
+      <form method="post">
+        <div class="form-field"><label>Name</label><input name="name" required></div>
+        <div class="form-field"><label>Email</label><input name="email" type="email" required></div>
+        <div class="form-field"><label>Message</label><textarea name="message" required></textarea></div>
+        <button type="submit" class="btn btn--gold">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
 {% endblock %}

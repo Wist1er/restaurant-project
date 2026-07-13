@@ -1,34 +1,103 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-<section id="about">
-  <h2>About Us</h2>
-  {% for b in about %}
-    <h3>{{ b.title }}</h3>
-    <p>{{ b.text }}</p>
-  {% endfor %}
+<section id="hero" class="hero">
+  <div>
+    <p class="hero__eyebrow">Restaurant</p>
+    <h1 class="hero__title">Hungry People</h1>
+    <div class="hero__actions">
+      <a href="{{ url_for('main.booking') }}" class="btn btn--gold">Book Table</a>
+      <a href="#about" class="btn btn--outline">Explore</a>
+    </div>
+  </div>
 </section>
 
-<section id="team">
-  <h2>Our Team</h2>
-  {% for t in team %}<h3>{{ t.title }}</h3>{% endfor %}
+<section id="about" class="about">
+  <div class="container about__grid">
+    <div>
+      <h2 class="section-title">About Us</h2>
+      <div class="section-underline"></div>
+      {% for block in about %}
+        <p class="about__text">{{ block.text }}</p>
+      {% endfor %}
+    </div>
+    <div class="about__photo"></div>
+  </div>
 </section>
 
-<section id="specialities">
-  <h2>Specialities</h2>
-  {% for s in specialities %}<h3>{{ s.title }}</h3>{% endfor %}
+<section id="team" class="team">
+  <div class="container team__grid">
+    <div class="team__photo"></div>
+    <div>
+      <h2 class="section-title">Our Team</h2>
+      <div class="section-underline"></div>
+      {% for member in team %}
+        <h3>{{ member.title }}</h3>
+        <p class="team__text">{{ member.text }}</p>
+      {% endfor %}
+    </div>
+  </div>
 </section>
 
-<section id="menu">
-  <h2>Delicious Menu</h2>
-  <ul>
-    {% for m in menu_items %}<li>{{ m.title }} — {{ m.price }}</li>{% endfor %}
-  </ul>
+<section id="specialities" class="specialities">
+  <div class="container">
+    <h2 class="section-title section-title--center">Specialities</h2>
+    <div class="section-underline section-underline--center"></div>
+
+    <div class="slider">
+      <div class="slider__track">
+        {% for item in specialities %}
+          <div class="slider__item">
+            <div class="slider__photo"></div>
+            <div class="slider__body">
+              <h3>{{ item.title }}</h3>
+              <p class="slider__subtitle">{{ item.subtitle }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="slider__controls">
+        <button class="slider__btn" data-slider-prev>&larr;</button>
+        <button class="slider__btn" data-slider-next>&rarr;</button>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="events">
-  <h2>Private Events</h2>
-  {% for e in events %}<h3>{{ e.title }}</h3>{% endfor %}
+<section id="menu" class="menu">
+  <div class="container">
+    <h2 class="section-title section-title--center">Delicious Menu</h2>
+    <div class="section-underline section-underline--center"></div>
+
+    <div class="menu__filters">
+      <button class="menu__filter menu__filter--active" data-category="all">All</button>
+      {% for category in menu_items|map(attribute='category')|unique %}
+        <button class="menu__filter" data-category="{{ category }}">{{ category }}</button>
+      {% endfor %}
+    </div>
+
+    <div class="menu__grid">
+      {% for item in menu_items %}
+        <div class="menu__item" data-category="{{ item.category }}">
+          <div>
+            <div class="menu__item-title">{{ item.title }}</div>
+            <div class="menu__item-subtitle">{{ item.category }}</div>
+          </div>
+          <div class="menu__item-price">${{ item.price }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="events" class="events">
+  <div class="container">
+    {% for event in events %}
+      <h2 class="section-title section-title--center">{{ event.title }}</h2>
+      <div class="section-underline section-underline--center"></div>
+      <p class="events__text">{{ event.text }}</p>
+    {% endfor %}
+  </div>
 </section>
 
 {% endblock %}
