@@ -5,10 +5,11 @@
     <div class="form-card">
       <h2 class="section-title section-title--center">Contact Us</h2>
       <div class="section-underline section-underline--center"></div>
-      <form method="post">
+      <form id="contact-form" method="post">
         <div class="form-field"><label>Name</label><input name="name" required></div>
         <div class="form-field"><label>Email</label><input name="email" type="email" required></div>
         <div class="form-field"><label>Message</label><textarea name="message" required></textarea></div>
+        <p class="form__message"></p>
         <button type="submit" class="btn btn--gold">Send Message</button>
       </form>
     </div>

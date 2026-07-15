@@ -5,7 +5,7 @@
     <div class="form-card">
       <h2 class="section-title section-title--center">Book a Table</h2>
       <div class="section-underline section-underline--center"></div>
-      <form method="post">
+      <form id="booking-form" method="post">
         <div class="form-row">
           <div class="form-field"><label>Name</label><input name="name" required></div>
           <div class="form-field"><label>Email</label><input name="email" type="email" required></div>
@@ -18,6 +18,7 @@
           <div class="form-field"><label>Date</label><input name="reserve_date" type="date" required></div>
           <div class="form-field"><label>Time</label><input name="reserve_time" type="time" required></div>
         </div>
+        <p class="form__message"></p>
         <button type="submit" class="btn btn--gold">Book Table</button>
       </form>
     </div>

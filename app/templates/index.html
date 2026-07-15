@@ -48,7 +48,8 @@
       <div class="slider__track">
         {% for item in specialities %}
           <div class="slider__item">
-            <div class="slider__photo"></div>
+            {% set photo_url = url_for('static', filename=item.image) if item.image else '' %}
+            <div class="slider__photo" style="background-image: url('{{ photo_url }}')"></div>
             <div class="slider__body">
               <h3>{{ item.title }}</h3>
               <p class="slider__subtitle">{{ item.subtitle }}</p>
@@ -92,11 +93,19 @@
 
 <section id="events" class="events">
   <div class="container">
-    {% for event in events %}
-      <h2 class="section-title section-title--center">{{ event.title }}</h2>
-      <div class="section-underline section-underline--center"></div>
-      <p class="events__text">{{ event.text }}</p>
-    {% endfor %}
+    <h2 class="section-title section-title--center">Events</h2>
+    <div class="section-underline section-underline--center"></div>
+
+    <div class="events__grid">
+      {% for event in events %}
+        <div class="events__item">
+          {% set photo_url = url_for('static', filename=event.image) if event.image else '' %}
+          <div class="events__photo" style="background-image: url('{{ photo_url }}')"></div>
+          <h3 class="events__title">{{ event.title }}</h3>
+          <p class="events__text">{{ event.text }}</p>
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </section>
 

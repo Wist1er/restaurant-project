@@ -22,13 +22,50 @@
         <li><a href="{{ url_for('main.menu') }}" class="nav__link">Menu</a></li>
         <li><a href="{{ url_for('main.home') }}#events" class="nav__link">Events</a></li>
         <li><a href="{{ url_for('main.contact') }}" class="nav__link">Contact</a></li>
-        <li><a href="{{ url_for('main.login') }}" class="nav__link">Login</a></li>
+        {% if current_user %}
+          <li><span class="nav__link nav__link--user">{{ current_user.email }}</span></li>
+          <li><a href="{{ url_for('main.logout') }}" class="nav__link">Logout</a></li>
+        {% else %}
+          <li><a href="#login-modal" class="nav__link">Login</a></li>
+        {% endif %}
       </ul>
     </nav>
 
     <button class="header__toggle" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </header>
+
+{% if not current_user %}
+<div id="login-modal" class="modal">
+  <a href="{{ request.path }}" class="modal__overlay"></a>
+  <div class="modal__box">
+    <a href="{{ request.path }}" class="modal__close">&times;</a>
+    <h3 class="modal__title">Login</h3>
+    <form id="login-form" action="{{ url_for('main.login') }}" method="post">
+      <input class="form__input" type="email" name="email" placeholder="Email" required>
+      <input class="form__input" type="password" name="password" placeholder="Password" required>
+      <p class="form__message"></p>
+      <button type="submit" class="btn btn--gold">Login</button>
+    </form>
+    <p class="modal__switch">Нет аккаунта? <a href="#register-modal">Register</a></p>
+  </div>
+</div>
+
+<div id="register-modal" class="modal">
+  <a href="{{ request.path }}" class="modal__overlay"></a>
+  <div class="modal__box">
+    <a href="{{ request.path }}" class="modal__close">&times;</a>
+    <h3 class="modal__title">Register</h3>
+    <form id="register-form" action="{{ url_for('main.register') }}" method="post">
+      <input class="form__input" type="email" name="email" placeholder="Email" required>
+      <input class="form__input" type="password" name="password" placeholder="Password" required>
+      <p class="form__message"></p>
+      <button type="submit" class="btn btn--gold">Register</button>
+    </form>
+    <p class="modal__switch">Уже есть аккаунт? <a href="#login-modal">Login</a></p>
+  </div>
+</div>
+{% endif %}
 
 {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -58,7 +95,7 @@
       </div>
       <div>
         <h4 class="footer__title">Location</h4>
-        <iframe class="footer__map" src="https://yandex.ru/map-widget/v1/?ll=37.611076%2C54.183098&z=18&l=map" width="100%" height="220" frameborder="0"></iframe>
+        <iframe class="footer__map" src="https://yandex.ru/map-widget/v1/?ll=37.610855%2C54.183075&z=17&l=map" width="100%" height="220" frameborder="0"></iframe>
       </div>
     </div>
     <div class="footer__bottom">&copy; Hungry People Restaurant</div>

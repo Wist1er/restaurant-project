@@ -37,3 +37,51 @@ filterButtons.forEach(btn => {
     });
   });
 });
+
+function handleAjaxForm(formId, onSuccess) {
+  const form = document.getElementById(formId);
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msgBox = form.querySelector('.form__message');
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+      });
+
+      let data;
+      try {
+        data = await response.json();
+      } catch (parseErr) {
+        throw new Error('server');
+      }
+
+      if (msgBox) {
+        msgBox.textContent = data.message;
+        msgBox.classList.toggle('form__message--success', data.ok);
+        msgBox.classList.toggle('form__message--error', !data.ok);
+      }
+
+      if (data.ok) {
+        form.reset();
+        if (onSuccess) onSuccess();
+      }
+    } catch (err) {
+      if (msgBox) {
+        msgBox.textContent = err.message === 'server'
+          ? 'Ошибка на сервере, проверьте консоль python run.py'
+          : 'Ошибка сети, попробуйте позже';
+        msgBox.classList.add('form__message--error');
+      }
+    }
+  });
+}
+
+handleAjaxForm('login-form', () => window.location.reload());
+handleAjaxForm('register-form', () => window.location.reload());
+handleAjaxForm('booking-form');
+handleAjaxForm('contact-form');
