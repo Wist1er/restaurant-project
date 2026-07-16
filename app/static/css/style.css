@@ -129,7 +129,6 @@ img { max-width: 100%; display: block; }
 .about__text { color: var(--color-gray); margin-bottom: 14px; }
 .about__photo {
   aspect-ratio: 4/3;
-  border: 8px solid var(--color-gold);
   background: url('../img/about-img.png') center center / cover no-repeat;
 }
 .team {
